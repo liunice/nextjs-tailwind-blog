@@ -103,7 +103,7 @@ export default function PostLayout(props: Props) {
                   />
                 </div>
               ) : null}
-              <div className="prose max-w-none break-words pt-10 pb-8 dark:prose-dark">
+              <div className="prose max-w-none break-words pt-10 pb-8 dark:prose-invert">
                 {children}
               </div>
               <div className="border-t border-gray-200 pt-6 pb-6 text-sm text-gray-700 dark:border-gray-700 dark:text-gray-300">
