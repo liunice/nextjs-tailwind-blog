@@ -6,10 +6,7 @@ tags: ['next-js', 'tailwind', 'guide']
 draft: false
 summary: 'Looking for a performant, out of the box template, with all the best in web technology to support your blogging needs? Checkout the Tailwind Nextjs Starter Blog template.'
 images: ['/static/images/canada/mountains.jpg', '/static/images/canada/toronto.jpg']
-authors: ['default', 'sparrowhawk']
 ---
-
-![tailwind-nextjs-banner](/static/images/twitter-card.png)
 
 # Tailwind Nextjs Starter Blog
 
@@ -137,7 +134,7 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 Frontmatter follows [Hugo's standards](https://gohugo.io/content-management/front-matter/).
 
-Currently 10 fields are supported.
+Currently 11 fields are supported.
 
 ```
 title (required)
@@ -147,6 +144,7 @@ lastmod (optional)
 draft (optional)
 summary (optional)
 images (optional, if none provided defaults to socialBanner in siteMetadata config)
+showCover (optional, defaults to true)
 authors (optional list which should correspond to the file names in `data/authors`. Uses `default` if none is specified)
 layout (optional list which should correspond to the file names in `data/layouts`)
 canonicalUrl (optional, canonical url for the post for SEO)
@@ -164,7 +162,6 @@ draft: false
 summary: 'Looking for a performant, out of the box template, with all the best in web technology to support your blogging needs? Checkout the Tailwind Nextjs Starter Blog template.'
 images: ['/static/images/canada/mountains.jpg', '/static/images/canada/toronto.jpg']
 authors: ['default', 'sparrowhawk']
-layout: PostLayout
 canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/introducing-tailwind-nextjs-starter-blog
 ---
 ```

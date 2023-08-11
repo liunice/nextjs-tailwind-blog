@@ -4,7 +4,7 @@ const siteMetadata = {
   author: 'Thomas Liu',
   headerTitle: "liunice's blog",
   description: 'A blog created with Next.js and Tailwind CSS',
-  language: 'en-us',
+  language: 'en-US',
   theme: 'system', // system, dark or light
   siteUrl: 'https://liunice.com',
   siteRepo: 'https://github.com/liunice/nextjs-tailwind-blog',
@@ -40,7 +40,7 @@ const siteMetadata = {
   newsletter: {
     // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
     // Please add your .env file and modify it according to your selection
-    provider: 'buttondown',
+    // provider: 'mailchimp',
   },
   comments: {
     // If you want to use an comment service provider you have to add it to the

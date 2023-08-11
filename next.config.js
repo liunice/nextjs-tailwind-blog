@@ -66,11 +66,14 @@ module.exports = () => {
       dirs: ['app', 'components', 'layouts', 'scripts'],
     },
     images: {
-      domains: ['picsum.photos'],
+      // domains: ['res.cloudinary.com'],
+      loader: 'custom',
+      loaderFile: './image-loader.ts',
     },
     experimental: {
       appDir: true,
     },
+    // output: 'export',
     async headers() {
       return [
         {

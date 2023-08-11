@@ -9,15 +9,17 @@ import { allBlogs, allAuthors } from 'contentlayer/generated'
 import type { Authors, Blog } from 'contentlayer/generated'
 import PostSimple from '@/layouts/PostSimple'
 import PostLayout from '@/layouts/PostLayout'
+import PostLayoutV2 from '@/layouts/PostLayoutV2'
 import PostBanner from '@/layouts/PostBanner'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 
 const isProduction = process.env.NODE_ENV === 'production'
-const defaultLayout = 'PostLayout'
+const defaultLayout = 'PostLayoutV2'
 const layouts = {
   PostSimple,
   PostLayout,
+  PostLayoutV2,
   PostBanner,
 }
 

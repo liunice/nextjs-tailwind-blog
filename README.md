@@ -198,6 +198,7 @@ lastmod (optional)
 draft (optional)
 summary (optional)
 images (optional)
+showCover (optional)
 authors (optional list which should correspond to the file names in `data/authors`. Uses `default` if none is specified)
 layout (optional list which should correspond to the file names in `data/layouts`)
 canonicalUrl (optional, canonical url for the post for SEO)
@@ -214,9 +215,10 @@ tags: ['next-js', 'tailwind', 'guide']
 draft: false
 summary: 'Looking for a performant, out of the box template, with all the best in web technology to support your blogging needs? Checkout the Tailwind Nextjs Starter Blog template.'
 images: ['/static/images/canada/mountains.jpg', '/static/images/canada/toronto.jpg']
+showCover: true
 authors: ['default', 'sparrowhawk']
-layout: PostLayout
-canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/introducing-tailwind-nextjs-starter-blog
+layout: PostLayoutV2
+canonicalUrl: https://liunice.com/blog/introducing-tailwind-nextjs-starter-blog
 ---
 ```
 

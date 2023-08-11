@@ -38,7 +38,7 @@ const computedFields: ComputedFields = {
     type: 'string',
     resolve: (doc) => doc._raw.sourceFilePath,
   },
-  toc: { type: 'string', resolve: (doc) => extractTocHeadings(doc.body.raw) },
+  toc: { type: 'json', resolve: (doc) => extractTocHeadings(doc.body.raw) },
 }
 
 /**
@@ -86,6 +86,7 @@ export const Blog = defineDocumentType(() => ({
     draft: { type: 'boolean' },
     summary: { type: 'string' },
     images: { type: 'list', of: { type: 'string' } },
+    showCover: { type: 'boolean', default: true },
     authors: { type: 'list', of: { type: 'string' } },
     layout: { type: 'string' },
     bibliography: { type: 'string' },
