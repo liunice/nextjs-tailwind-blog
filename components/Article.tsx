@@ -26,9 +26,8 @@ export default function Article(post: CoreContent<Blog>) {
                     alt={title}
                     className="w-full transform object-cover duration-200 hover:scale-110"
                     src={coverUrl}
-                    width={0}
-                    height={0}
-                    sizes="100vw"
+                    width={200}
+                    height={200}
                   />
                 </Link>
               </dt>
