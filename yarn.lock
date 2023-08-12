@@ -4205,6 +4205,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cloudinary-core@npm:^2.13.0":
+  version: 2.13.0
+  resolution: "cloudinary-core@npm:2.13.0"
+  peerDependencies:
+    lodash: ">=4.0"
+  checksum: 5485fbc094b0722f6d4c6becfde431d3042c3c926a69c4bc2f6b373ac059b9b798703845c6cbf4a55ee2eb1c7718f5ec5130772117419755015b04dabd369be5
+  languageName: node
+  linkType: hard
+
+"cloudinary@npm:^1.40.0":
+  version: 1.40.0
+  resolution: "cloudinary@npm:1.40.0"
+  dependencies:
+    cloudinary-core: ^2.13.0
+    core-js: ^3.30.1
+    lodash: ^4.17.21
+    q: ^1.5.1
+  checksum: 722e1ce03a0f9450ba36f70b961642ce7bb7620c5fce69e243a812a6a59ef37e6c34a05c59c94a16c35ecebca6de7cea92e94297a9bdfa134587f6f02960e3f2
+  languageName: node
+  linkType: hard
+
 "color-convert@npm:^1.9.0":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
@@ -4392,6 +4413,13 @@ __metadata:
   dependencies:
     browserslist: ^4.21.9
   checksum: 9a16d6992621f4e099169297381a28d5712cdef7df1fa85352a7c285a5885d5d7a117ec2eae9ad715ed88c7cc774787a22cdb8aceababf6775fbc8b0cbeccdb7
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.30.1":
+  version: 3.32.0
+  resolution: "core-js@npm:3.32.0"
+  checksum: 52921395028550e4c9d21d47b9836439bb5b6b9eefc34d45a3948a68d81fdd093acc0fadf69f9cf632b82f01f95f22f484408a93dd9e940b19119ac204cd2925
   languageName: node
   linkType: hard
 
@@ -4745,6 +4773,13 @@ __metadata:
     no-case: ^3.0.4
     tslib: ^2.0.3
   checksum: a65e3519414856df0228b9f645332f974f2bf5433370f544a681122eab59e66038fc3349b4be1cdc47152779dac71a5864f1ccda2f745e767c46e9c6543b1169
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^16.3.1":
+  version: 16.3.1
+  resolution: "dotenv@npm:16.3.1"
+  checksum: 15d75e7279018f4bafd0ee9706593dd14455ddb71b3bcba9c52574460b7ccaf67d5cf8b2c08a5af1a9da6db36c956a04a1192b101ee102a3e0cf8817bbcf3dfd
   languageName: node
   linkType: hard
 
@@ -7213,7 +7248,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.20":
+"lodash@npm:^4.17.20, lodash@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -8464,8 +8499,10 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^6.1.0
     "@typescript-eslint/parser": ^6.1.0
     autoprefixer: ^10.4.13
+    cloudinary: ^1.40.0
     contentlayer: 0.3.4
     cross-env: ^7.0.3
+    dotenv: ^16.3.1
     esbuild: 0.18.11
     eslint: ^8.45.0
     eslint-config-next: 13.4.12
@@ -9267,6 +9304,13 @@ __metadata:
   version: 2.3.0
   resolution: "punycode@npm:2.3.0"
   checksum: 39f760e09a2a3bbfe8f5287cf733ecdad69d6af2fe6f97ca95f24b8921858b91e9ea3c9eeec6e08cede96181b3bb33f95c6ffd8c77e63986508aa2e8159fa200
+  languageName: node
+  linkType: hard
+
+"q@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "q@npm:1.5.1"
+  checksum: 147baa93c805bc1200ed698bdf9c72e9e42c05f96d007e33a558b5fdfd63e5ea130e99313f28efc1783e90e6bdb4e48b67a36fcc026b7b09202437ae88a1fb12
   languageName: node
   linkType: hard
 
