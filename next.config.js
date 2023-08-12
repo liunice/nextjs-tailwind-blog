@@ -66,7 +66,6 @@ module.exports = () => {
       dirs: ['app', 'components', 'layouts', 'scripts'],
     },
     images: {
-      // domains: ['res.cloudinary.com'],
       loader: 'custom',
       loaderFile: './image-loader.ts',
     },
