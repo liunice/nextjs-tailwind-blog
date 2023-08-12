@@ -24,7 +24,7 @@ export default function Article(post: CoreContent<Blog>) {
                 >
                   <Image
                     alt={title}
-                    className="w-full transform object-cover duration-200 hover:scale-110"
+                    className="w-full xl:aspect-video transform object-cover duration-200 hover:scale-110"
                     src={coverUrl}
                     width={200}
                     height={200}
