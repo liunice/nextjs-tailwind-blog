@@ -51,7 +51,9 @@ export default function Article(post: CoreContent<Blog>) {
                   ))}
                 </div>
               </div>
-              <div className="prose max-w-none text-gray-500 dark:text-gray-400">{summary}</div>
+              <div className="prose max-w-none text-gray-500 dark:text-gray-400 xl:line-clamp-2">
+                {summary}
+              </div>
             </div>
             <div className="text-base font-medium leading-6">
               <Link
