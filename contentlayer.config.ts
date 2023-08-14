@@ -21,6 +21,9 @@ import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
+import { Blog as Post } from 'contentlayer/generated'
+// search
+import algoliasearch from 'algoliasearch'
 
 const root = process.cwd()
 
@@ -61,7 +64,7 @@ function createTagCount(allBlogs) {
   writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
 }
 
-function createSearchIndex(allBlogs) {
+async function createSearchIndex(allBlogs: Post[]) {
   if (
     siteMetadata?.search?.provider === 'kbar' &&
     siteMetadata.search.kbarConfig.searchDocumentsPath
@@ -71,6 +74,30 @@ function createSearchIndex(allBlogs) {
       JSON.stringify(allCoreContent(sortPosts(allBlogs)))
     )
     console.log('Local search index generated...')
+  } else if (siteMetadata?.search?.provider === 'algolia') {
+    const adminKey = process.env.ALGOLIA_ADMIN_API_KEY
+    if (!adminKey) {
+      console.error('Algolia admin API key not found')
+      return
+    }
+
+    const client = algoliasearch(siteMetadata.search.algoliaConfig.appId, adminKey)
+    const index = client.initIndex(siteMetadata.search.algoliaConfig.indexName)
+    // convert tha data retrieved by contentlayer
+    // into the desired Algolia format
+    const algoliaPosts = allBlogs.map((blog) => {
+      return {
+        objectID: blog._id,
+        title: blog.title,
+        excerpt: blog.summary,
+        slug: blog.slug,
+        date: blog.date,
+      }
+    })
+    // save all posts info to Algolia
+    await index.replaceAllObjects(algoliaPosts)
+
+    console.log('Algolia search index generated...')
   }
 }
 
