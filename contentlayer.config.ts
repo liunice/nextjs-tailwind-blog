@@ -75,9 +75,12 @@ async function createSearchIndex(allBlogs: Post[]) {
     )
     console.log('Local search index generated...')
   } else if (siteMetadata?.search?.provider === 'algolia') {
+    if (process.env.NODE_ENV === 'development') {
+      return
+    }
     const adminKey = process.env.ALGOLIA_ADMIN_API_KEY
     if (!adminKey) {
-      console.error('Algolia admin API key not found')
+      console.error('Algolia admin API key not configured')
       return
     }
 
@@ -160,7 +163,7 @@ export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Blog, Authors],
   mdx: {
-    cwd: process.cwd(),
+    cwd: root,
     remarkPlugins: [
       remarkExtractFrontmatter,
       remarkGfm,
