@@ -19,15 +19,15 @@ export default function Article(post: CoreContent<Blog>) {
               <dt className="mb-4">
                 <Link
                   href={`/blog/${slug}`}
-                  className="block overflow-hidden rounded shadow-lg"
+                  className="relative aspect-video block overflow-hidden rounded shadow-lg"
                   title={title}
                 >
                   <Image
                     alt={title}
-                    className="w-full xl:aspect-video transform object-cover duration-200 hover:scale-110"
+                    className="object-cover"
                     src={coverUrl}
-                    width={200}
-                    height={200}
+                    sizes="(min-width: 1280px) 20vw, 200vw"
+                    fill
                   />
                 </Link>
               </dt>
