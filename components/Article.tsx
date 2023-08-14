@@ -26,8 +26,10 @@ export default function Article(post: CoreContent<Blog>) {
                     alt={title}
                     className="object-cover"
                     src={coverUrl}
-                    sizes="(min-width: 1280px) 20vw, 200vw"
+                    sizes="(min-width: 1280px) 20vw, 100vw"
                     fill
+                    placeholder={post.thumbnails?.[coverUrl] && 'blur'}
+                    blurDataURL={post.thumbnails?.[coverUrl]}
                   />
                 </Link>
               </dt>

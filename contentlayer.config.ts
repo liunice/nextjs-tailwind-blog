@@ -1,5 +1,5 @@
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
-import { writeFileSync } from 'fs'
+import { readFileSync, writeFileSync, existsSync } from 'fs'
 import readingTime from 'reading-time'
 import GithubSlugger from 'github-slugger'
 import path from 'path'
@@ -9,9 +9,10 @@ import remarkMath from 'remark-math'
 import {
   remarkExtractFrontmatter,
   remarkCodeTitles,
-  remarkImgToJsx,
+  // remarkImgToJsx,
   extractTocHeadings,
 } from 'pliny/mdx-plugins/index.js'
+import { remarkImgToJsx } from './plugins/remark-img-to-jsx'
 // Rehype packages
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -24,6 +25,8 @@ import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import { Blog as Post } from 'contentlayer/generated'
 // search
 import algoliasearch from 'algoliasearch'
+// thumbnails
+import { generateThumbnail } from './lib/image.mjs'
 
 const root = process.cwd()
 
@@ -42,6 +45,28 @@ const computedFields: ComputedFields = {
     resolve: (doc) => doc._raw.sourceFilePath,
   },
   toc: { type: 'json', resolve: (doc) => extractTocHeadings(doc.body.raw) },
+  thumbnails: {
+    type: 'json',
+    resolve: async (doc: Post) => {
+      // only process blog folder
+      if (!doc._raw.sourceFilePath.startsWith('blog/')) {
+        return null
+      }
+
+      const slug = doc._raw.flattenedPath.replace(/^.+?(\/)/, '')
+      // read json file at `.data/blog/${slug}.json`
+      const filePath = `./.data/blog/${slug}.json`
+      // generate thumbnails (if not exists)
+      for (const image of doc.images || []) {
+        await generateThumbnail(slug, image)
+      }
+
+      // read
+      const root = JSON.parse(readFileSync(filePath, 'utf8'))
+      console.log(`[thumbnails] READY: ${slug}`)
+      return root.thumbnails
+    },
+  },
 }
 
 /**
@@ -182,7 +207,15 @@ export default makeSource({
   },
   onSuccess: async (importData) => {
     const { allBlogs } = await importData()
+
     createTagCount(allBlogs)
-    createSearchIndex(allBlogs)
+
+    await createSearchIndex(allBlogs)
+
+    // for (const blog of allBlogs) {
+    //   for (const image of blog.images || []) {
+    //     await generateThumbnail(blog.slug, image)
+    //   }
+    // }
   },
 })

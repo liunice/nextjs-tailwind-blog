@@ -1,6 +1,7 @@
 import cloudinary from 'cloudinary'
 import path from 'path'
 import dotenv from 'dotenv'
+import { generateThumbnail } from '../lib/image.js'
 
 // load .env file
 dotenv.config({
@@ -14,16 +15,16 @@ cloudinary.v2.config({
   secure: true,
 })
 
-const uploadToCloudinary = async () => {
-  const filename = process.argv[2]
-  const folder = `${process.env.NEXT_PUBLIC_CLOUDINARY_ROOT_FOLDER}/static/images`
+async function uploadToCloudinary(imagePath) {
+  // TODO: support nested image path
+  const rootFolder = process.env.NEXT_PUBLIC_CLOUDINARY_ROOT_FOLDER
   // public_id: ignore file extension
-  const public_id = filename.replace(/\.[^/.]+$/, '')
-  const filePath = path.join(process.cwd(), 'public/static/images', filename)
+  const publicId = imagePath.replace(/\.[^/.]+$/, '')
+  const filePath = path.join(process.cwd(), 'public', imagePath)
   console.log(`uploading image to cloudinary: ${filePath}...`)
   const resp = await cloudinary.v2.uploader.upload(filePath, {
-    folder,
-    public_id,
+    folder: rootFolder,
+    public_id: publicId,
     resource_type: 'image',
   })
 
@@ -35,4 +36,10 @@ const uploadToCloudinary = async () => {
   }
 }
 
-uploadToCloudinary()
+;(async () => {
+  const imagePath = `/static/images/${process.argv[2]}` // 2023/image.jpg
+  await uploadToCloudinary(imagePath)
+
+  const slug = process.argv[3] // 2023/hello-world
+  await generateThumbnail(slug, imagePath)
+})()

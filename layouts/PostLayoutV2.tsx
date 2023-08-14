@@ -30,7 +30,7 @@ interface Props {
 
 export default function PostLayout(props: Props) {
   const { authorDetails, content, next, prev, children } = props
-  const { filePath, path, slug, date, title, tags, images, showCover, toc } = content
+  const { filePath, path, slug, date, title, tags, images, showCover, toc, thumbnails } = content
   const basePath = path.split('/')[0]
   const coverUrl = images?.[0]
 
@@ -100,6 +100,8 @@ export default function PostLayout(props: Props) {
                     width={0}
                     height={0}
                     sizes="100vw"
+                    placeholder={thumbnails?.[coverUrl] && 'blur'}
+                    blurDataURL={thumbnails?.[coverUrl]}
                   />
                 </div>
               ) : null}
