@@ -1,13 +1,10 @@
 import algoliasearch from 'algoliasearch'
 import siteMetadata from '../data/siteMetadata.js'
 import { allBlogs } from '../.contentlayer/generated/index.mjs'
-import path from 'path'
 import dotenv from 'dotenv'
 
 // load .env file
-dotenv.config({
-  path: path.resolve(process.cwd(), '.env.local'),
-})
+dotenv.config()
 
 const rebuildSearchIndex = async () => {
   const client = algoliasearch(

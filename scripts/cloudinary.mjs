@@ -1,12 +1,10 @@
 import cloudinary from 'cloudinary'
 import path from 'path'
 import dotenv from 'dotenv'
-import { generateThumbnail } from '../lib/image.js'
+import { generateThumbnail } from '../lib/image.mjs'
 
 // load .env file
-dotenv.config({
-  path: path.resolve(process.cwd(), '.env.local'),
-})
+dotenv.config()
 
 cloudinary.v2.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
