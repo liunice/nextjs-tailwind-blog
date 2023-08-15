@@ -86,8 +86,9 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const slug = decodeURI(params.slug.join('/'))
   const sortedPosts = sortPosts(allBlogs) as Blog[]
   const postIndex = sortedPosts.findIndex((p) => p.slug === slug)
-  const prev = coreContent(sortedPosts[postIndex + 1])
-  const next = coreContent(sortedPosts[postIndex - 1])
+  const prev =
+    postIndex < sortedPosts.length - 1 ? coreContent(sortedPosts[postIndex + 1]) : undefined
+  const next = postIndex >= 1 ? coreContent(sortedPosts[postIndex - 1]) : undefined
   const post = sortedPosts.find((p) => p.slug === slug) as Blog
   const authorList = post?.authors || ['default']
   const authorDetails = authorList.map((author) => {
