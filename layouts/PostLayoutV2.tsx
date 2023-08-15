@@ -92,13 +92,12 @@ export default function PostLayout(props: Props) {
             </div>
             <div className="xl:col-span-3 xl:row-span-2 xl:pb-0">
               {showCover && coverUrl ? (
-                <div className="mt-6">
+                <div className="relative aspect-video mt-6">
                   <Image
                     alt={title}
                     className="w-full rounded object-cover shadow-lg"
                     src={coverUrl}
-                    width={0}
-                    height={0}
+                    fill
                     sizes="100vw"
                     placeholder={thumbnails?.[coverUrl] && 'blur'}
                     blurDataURL={thumbnails?.[coverUrl]}
