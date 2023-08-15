@@ -99,34 +99,36 @@ async function createSearchIndex(allBlogs: Post[]) {
       JSON.stringify(allCoreContent(sortPosts(allBlogs)))
     )
     console.log('Local search index generated...')
-  } else if (siteMetadata?.search?.provider === 'algolia') {
-    if (process.env.NODE_ENV === 'development') {
-      return
-    }
-    const adminKey = process.env.ALGOLIA_ADMIN_API_KEY
-    if (!adminKey) {
-      console.error('Algolia admin API key not configured')
-      return
-    }
-
-    const client = algoliasearch(siteMetadata.search.algoliaConfig.appId, adminKey)
-    const index = client.initIndex(siteMetadata.search.algoliaConfig.indexName)
-    // convert tha data retrieved by contentlayer
-    // into the desired Algolia format
-    const algoliaPosts = allBlogs.map((blog) => {
-      return {
-        objectID: blog._id,
-        title: blog.title,
-        excerpt: blog.summary,
-        slug: blog.slug,
-        date: blog.date,
-      }
-    })
-    // save all posts info to Algolia
-    await index.replaceAllObjects(algoliaPosts)
-
-    console.log('Algolia search index generated...')
   }
+  // we use the official crawler from algolia web console to generate search index now
+  // else if (siteMetadata?.search?.provider === 'algolia') {
+  //   if (process.env.NODE_ENV === 'development') {
+  //     return
+  //   }
+  //   const adminKey = process.env.ALGOLIA_ADMIN_API_KEY
+  //   if (!adminKey) {
+  //     console.error('Algolia admin API key not configured')
+  //     return
+  //   }
+
+  //   const client = algoliasearch(siteMetadata.search.algoliaConfig.appId, adminKey)
+  //   const index = client.initIndex(siteMetadata.search.algoliaConfig.indexName)
+  //   // convert tha data retrieved by contentlayer
+  //   // into the desired Algolia format
+  //   const algoliaPosts = allBlogs.map((blog) => {
+  //     return {
+  //       objectID: blog._id,
+  //       title: blog.title,
+  //       excerpt: blog.summary,
+  //       slug: blog.slug,
+  //       date: blog.date,
+  //     }
+  //   })
+  //   // save all posts info to Algolia
+  //   await index.replaceAllObjects(algoliaPosts)
+
+  //   console.log('Algolia search index generated...')
+  // }
 }
 
 export const Blog = defineDocumentType(() => ({
@@ -211,11 +213,5 @@ export default makeSource({
     createTagCount(allBlogs)
 
     await createSearchIndex(allBlogs)
-
-    // for (const blog of allBlogs) {
-    //   for (const image of blog.images || []) {
-    //     await generateThumbnail(blog.slug, image)
-    //   }
-    // }
   },
 })

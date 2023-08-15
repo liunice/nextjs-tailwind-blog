@@ -80,10 +80,13 @@ const siteMetadata = {
     provider: 'algolia',
     algoliaConfig: {
       // The application ID provided by Algolia
-      appId: 'GIGCITA3OA',
+      // appId: 'GIGCITA3OA',
+      appId: '9UM3SUHH54',
       // Public API key: it is safe to commit it
-      apiKey: 'a633e6aa7d2eb41ffe35a55fc13bf99a',
-      indexName: 'liunice_blog',
+      // apiKey: 'a633e6aa7d2eb41ffe35a55fc13bf99a',
+      apiKey: '8b1a0385af516b91f7c6de130457ed23',
+      // indexName: 'liunice_blog',
+      indexName: 'liunice',
     },
   },
 }
