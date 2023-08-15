@@ -18,22 +18,32 @@ interface LayoutProps {
 }
 
 export default function PostMinimal({ content, next, prev, children }: LayoutProps) {
-  const { slug, title, images } = content
-  const displayImage = images && images.length > 0 ? images[0] : '/static/images/twitter-card.png'
-
+  const { slug, title, images, thumbnails } = content
+  const displayImage = images?.[0]
   return (
     <SectionContainer>
       <ScrollTopAndComment />
       <article>
         <div>
           <div className="space-y-1 pb-10 text-center dark:border-gray-700">
-            <div className="w-full">
-              <Bleed>
-                <div className="aspect-[2/1] w-full relative">
-                  <Image src={displayImage} alt={title} fill className="object-cover" />
-                </div>
-              </Bleed>
-            </div>
+            {displayImage ? (
+              <div className="w-full">
+                <Bleed>
+                  <div className="aspect-[2/1] w-full relative">
+                    <Image
+                      src={displayImage}
+                      alt={title}
+                      fill
+                      className="object-cover"
+                      sizes="100vw"
+                      placeholder={thumbnails?.[displayImage] && 'blur'}
+                      blurDataURL={thumbnails?.[displayImage]}
+                    />
+                  </div>
+                </Bleed>
+              </div>
+            ) : null}
+
             <div className="pt-10 relative">
               <PageTitle>{title}</PageTitle>
             </div>
