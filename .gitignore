@@ -27,6 +27,7 @@ public/sitemap.xml
 
 # search
 /public/search.json
+/scripts/algolia.mjs
 
 # misc
 .DS_Store
