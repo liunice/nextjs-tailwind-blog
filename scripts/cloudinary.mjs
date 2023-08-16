@@ -14,30 +14,36 @@ cloudinary.v2.config({
 })
 
 async function uploadToCloudinary(imagePath) {
-  // TODO: support nested image path
-  const rootFolder = process.env.NEXT_PUBLIC_CLOUDINARY_ROOT_FOLDER
+  // support uploading image to subfolders
+  // cloudinary will create subfolders automatically if necessary
+  const folder = path.join(process.env.NEXT_PUBLIC_CLOUDINARY_ROOT_FOLDER, path.dirname(imagePath))
   // public_id: ignore file extension
-  const publicId = imagePath.replace(/\.[^/.]+$/, '')
+  const publicId = path.parse(imagePath).name
   const filePath = path.join(process.cwd(), 'public', imagePath)
   console.log(`uploading image to cloudinary: ${filePath}...`)
-  const resp = await cloudinary.v2.uploader.upload(filePath, {
-    folder: rootFolder,
-    public_id: publicId,
-    resource_type: 'image',
-  })
-
-  if (resp.public_id) {
+  try {
+    const resp = await cloudinary.v2.uploader.upload(filePath, {
+      folder,
+      public_id: publicId,
+      resource_type: 'image',
+    })
     console.log('image uploaded:', resp.public_id)
-  } else {
-    console.log('image upload failed')
-    console.log(resp)
+  } catch (error) {
+    console.log('image upload failed:', error.message)
   }
 }
 
 ;(async () => {
+  if (process.argv.length < 3) {
+    console.log('Usage: yarn image <imagePath> [slug]')
+    return
+  }
+
   const imagePath = `/static/images/${process.argv[2]}` // 2023/image.jpg
   await uploadToCloudinary(imagePath)
 
   const slug = process.argv[3] // 2023/hello-world
-  await generateThumbnail(slug, imagePath)
+  if (slug) {
+    await generateThumbnail(slug, imagePath)
+  }
 })()
