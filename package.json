@@ -44,6 +44,8 @@
     "unist-util-visit": "^4.1.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
     "@svgr/webpack": "^8.0.1",
     "@types/mdx": "^2.0.6",
     "@types/react": "^18.2.20",
