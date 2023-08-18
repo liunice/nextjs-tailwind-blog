@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx --no-install lint-staged
+# disable lint-staged temporarily since it's so slow...
+# npx --no-install lint-staged
