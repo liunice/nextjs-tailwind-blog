@@ -11,7 +11,7 @@ export default function Article(post: CoreContent<Blog>) {
   const { slug, date, title, summary, tags, images } = post
   const coverUrl = images?.[0]
   return (
-    <li className="py-12">
+    <li className="py-12 xl:hover:scale-105 xl:transition">
       <article>
         <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-start xl:gap-5 xl:space-y-0">
           <dl className="xl:col-span-1">
