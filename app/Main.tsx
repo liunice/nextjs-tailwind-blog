@@ -10,7 +10,7 @@ import { FEATURED_POSTS } from '@/constant'
 export default function Home({ posts }: { posts: CoreContent<Blog>[] }) {
   return (
     <>
-      <div className="border-t divide-gray-200 dark:divide-gray-700">
+      <div className="border-t border-gray-200 dark:border-gray-700">
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, FEATURED_POSTS).map((post) => {
