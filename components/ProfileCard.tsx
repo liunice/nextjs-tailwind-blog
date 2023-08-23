@@ -57,7 +57,7 @@ export function ProfileCard() {
         style={style}
         className={clsx(
           'flex flex-col overflow-hidden transition-all duration-200 ease-out xl:rounded-lg',
-          'bg-white shadow-demure dark:bg-dark dark:shadow-mondegreen',
+          'shadow-demure dark:prose-invert dark:shadow-mondegreen',
           'outline outline-1 outline-gray-100 dark:outline-gray-600'
         )}
       >
@@ -76,7 +76,7 @@ export function ProfileCard() {
         />
         <SpotifyNowPlaying />
         <ProfileCardInfo />
-        <span className="h-1.5 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
+        <span className="prose-invert h-1.5 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
       </div>
     </div>
   )
