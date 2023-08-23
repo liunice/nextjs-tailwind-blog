@@ -1,7 +1,7 @@
-import { Toc } from '@/types/Toc'
+import { TOC } from '@/types/server'
 
 interface TOCInlineProps {
-  toc: Toc
+  toc: TOC
   indentDepth?: number
   fromHeading?: number
   toHeading?: number

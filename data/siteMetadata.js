@@ -16,7 +16,7 @@ const siteMetadata = {
   twitter: 'https://twitter.com/liunicer',
   facebook: 'https://facebook.com',
   youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com',
+  linkedin: 'https://www.linkedin.com/in/liunice',
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the

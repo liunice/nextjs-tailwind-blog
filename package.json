@@ -18,11 +18,13 @@
     "@tailwindcss/forms": "^0.5.4",
     "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.15",
+    "clsx": "^2.0.0",
     "contentlayer": "0.3.4",
     "esbuild": "^0.19.2",
     "github-slugger": "^1.5.0",
     "gray-matter": "^4.0.3",
     "image-size": "^1.0.2",
+    "lucide-react": "^0.268.0",
     "next": "^13.4.16",
     "next-contentlayer": "0.3.4",
     "next-themes": "^0.2.1",
@@ -40,7 +42,9 @@
     "remark": "^14.0.3",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
+    "swr": "^2.2.1",
     "tailwindcss": "^3.3.3",
+    "typed.js": "^2.0.16",
     "unist-util-visit": "^4.1.2"
   },
   "devDependencies": {
