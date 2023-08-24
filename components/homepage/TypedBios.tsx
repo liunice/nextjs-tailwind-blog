@@ -30,13 +30,12 @@ export function TypedBios() {
   return (
     <div>
       <ul id="bios" className="hidden">
-        <li>I'm aliased as Thomas at work.</li>
         <li>I'm a learner, builder, and freedom seeker.</li>
         <li>I live in Shenzhen, China.</li>
-        <li>My first programming language I learned was C#.</li>
+        <li>The first programming language I learned was C#.</li>
         <li>I love web development.</li>
         <li>I'm focusing on building eCommerce software.</li>
-        <li>I work mostly with JS/TS technologies</li>
+        <li>I work mostly with JS/TS technologies.</li>
         <li>
           I love playing video games, Baldur's Gate 3 is my favorite one.
           <Twemoji emoji="video-game" />

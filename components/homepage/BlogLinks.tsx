@@ -16,16 +16,10 @@ export function BlogLinks() {
           My writings
         </span>
       </Link>
-      <Link href="/snippets" className="hover:underline">
-        <Twemoji emoji="dna" />
-        <span data-umami-event="home-link-snippets" className="ml-1.5">
-          My snippets collection
-        </span>
-      </Link>
       <Link href="/about" className="hover:underline">
         <Twemoji emoji="face-with-monocle" />
         <span data-umami-event="home-link-about" className="ml-1.5">
-          More about me & myself
+          More about me
         </span>
       </Link>
       <Link href="/resume" className="hover:underline">
