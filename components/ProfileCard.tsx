@@ -1,7 +1,7 @@
 'use client'
 
 import { clsx } from 'clsx'
-import Image from 'next/image'
+import Image from '@/components/Image'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { ProfileCardInfo } from './ProfileInfo'
 import { SpotifyNowPlaying } from './SpotifyNowPlaying'

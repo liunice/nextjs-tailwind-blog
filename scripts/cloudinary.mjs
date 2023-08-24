@@ -18,13 +18,20 @@ async function uploadToCloudinary(imagePath) {
   // cloudinary will create subfolders automatically if necessary
   const folder = path.join(process.env.NEXT_PUBLIC_CLOUDINARY_ROOT_FOLDER, path.dirname(imagePath))
   // public_id: ignore file extension
-  const publicId = path.parse(imagePath).name
+  const filename = path.parse(imagePath).name
+
+  // delete and invalidate cache
+  // cloudinary.v2.uploader.destroy(path.join(folder, filename), {
+  //   invalidate: 'true',
+  // })
+
+  // upload
   const filePath = path.join(process.cwd(), 'public', imagePath)
   console.log(`uploading image to cloudinary: ${filePath}...`)
   try {
     const resp = await cloudinary.v2.uploader.upload(filePath, {
       folder,
-      public_id: publicId,
+      public_id: filename,
       resource_type: 'image',
     })
     console.log('image uploaded:', resp.public_id)
