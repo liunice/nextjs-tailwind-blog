@@ -9,7 +9,7 @@ import Comments from '@/components/Comments'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import TOCInline from '@/components/TOCInline'
 import { ReactNode } from 'react'
-import { Authors, Blog } from 'contentlayer/generated'
+import { Author, Blog } from 'contentlayer/generated'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 
@@ -21,7 +21,7 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
 }
 
 interface Props {
-  authorDetails: CoreContent<Authors>[]
+  authorDetails: CoreContent<Author>[]
   content: CoreContent<Blog>
   next?: { slug: string; title: string }
   prev?: { slug: string; title: string }
