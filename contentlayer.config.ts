@@ -1,5 +1,5 @@
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
-import { readFileSync, writeFileSync, existsSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 import readingTime from 'reading-time'
 import GithubSlugger from 'github-slugger'
 import path from 'path'
@@ -23,9 +23,6 @@ import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import { Blog as Post } from 'contentlayer/generated'
-// search
-import algoliasearch from 'algoliasearch'
-// thumbnails
 import { generateThumbnail } from './lib/image.mjs'
 
 const root = process.cwd()
@@ -45,28 +42,6 @@ const computedFields: ComputedFields = {
     resolve: (doc) => doc._raw.sourceFilePath,
   },
   toc: { type: 'json', resolve: (doc) => extractTocHeadings(doc.body.raw) },
-  thumbnails: {
-    type: 'json',
-    resolve: async (doc: Post) => {
-      // only process blog folder
-      if (!doc._raw.sourceFilePath.startsWith('blog/')) {
-        return null
-      }
-
-      const slug = doc._raw.flattenedPath.replace(/^.+?(\/)/, '')
-      // read json file at `.data/blog/${slug}.json`
-      const filePath = `./.data/blog/${slug}.json`
-      // generate thumbnails (if not exists)
-      for (const image of doc.images || []) {
-        await generateThumbnail(slug, image)
-      }
-
-      // read
-      const root = JSON.parse(readFileSync(filePath, 'utf8'))
-      console.log(`[thumbnails] READY: ${slug}`)
-      return root.thumbnails
-    },
-  },
 }
 
 /**
@@ -151,6 +126,23 @@ export const Blog = defineDocumentType(() => ({
   },
   computedFields: {
     ...computedFields,
+    thumbnails: {
+      type: 'json',
+      resolve: async (doc: Post) => {
+        const slug = doc._raw.flattenedPath.replace(/^.+?(\/)/, '')
+        // read json file at `.data/blog/${slug}.json`
+        const filePath = `./.data/blog/${slug}.json`
+        // generate thumbnails (if not exists)
+        for (const image of doc.images || []) {
+          await generateThumbnail(slug, image)
+        }
+
+        // read
+        const root = JSON.parse(readFileSync(filePath, 'utf8'))
+        console.log(`[thumbnails] READY: ${slug}`)
+        return root.thumbnails
+      },
+    },
     structuredData: {
       type: 'json',
       resolve: (doc) => ({
@@ -168,9 +160,27 @@ export const Blog = defineDocumentType(() => ({
   },
 }))
 
-export const Authors = defineDocumentType(() => ({
-  name: 'Authors',
+export const Author = defineDocumentType(() => ({
+  name: 'Author',
   filePathPattern: 'authors/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    name: { type: 'string', required: true },
+    avatar: { type: 'string' },
+    occupation: { type: 'string' },
+    company: { type: 'string' },
+    email: { type: 'string' },
+    twitter: { type: 'string' },
+    linkedin: { type: 'string' },
+    github: { type: 'string' },
+    layout: { type: 'string' },
+  },
+  computedFields,
+}))
+
+export const Resume = defineDocumentType(() => ({
+  name: 'Resume',
+  filePathPattern: 'resume/**/*.mdx',
   contentType: 'mdx',
   fields: {
     name: { type: 'string', required: true },
@@ -188,7 +198,7 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors],
+  documentTypes: [Blog, Author, Resume],
   mdx: {
     cwd: root,
     remarkPlugins: [
