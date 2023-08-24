@@ -106,7 +106,7 @@ async function createSearchIndex(allBlogs: Post[]) {
   // }
 }
 
-export const Blog = defineDocumentType(() => ({
+const Blog = defineDocumentType(() => ({
   name: 'Blog',
   filePathPattern: 'blog/**/*.mdx',
   contentType: 'mdx',
@@ -160,7 +160,7 @@ export const Blog = defineDocumentType(() => ({
   },
 }))
 
-export const Author = defineDocumentType(() => ({
+const Author = defineDocumentType(() => ({
   name: 'Author',
   filePathPattern: 'authors/**/*.mdx',
   contentType: 'mdx',
@@ -178,7 +178,7 @@ export const Author = defineDocumentType(() => ({
   computedFields,
 }))
 
-export const Resume = defineDocumentType(() => ({
+const Resume = defineDocumentType(() => ({
   name: 'Resume',
   filePathPattern: 'resume/**/*.mdx',
   contentType: 'mdx',
@@ -191,14 +191,20 @@ export const Resume = defineDocumentType(() => ({
     twitter: { type: 'string' },
     linkedin: { type: 'string' },
     github: { type: 'string' },
-    layout: { type: 'string' },
   },
+  computedFields,
+}))
+
+const Page = defineDocumentType(() => ({
+  name: 'Page',
+  filePathPattern: 'pages/**/*.mdx',
+  contentType: 'mdx',
   computedFields,
 }))
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Author, Resume],
+  documentTypes: [Blog, Author, Resume, Page],
   mdx: {
     cwd: root,
     remarkPlugins: [
