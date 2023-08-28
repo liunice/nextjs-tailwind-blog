@@ -1,56 +1,130 @@
 import cloudinary from 'cloudinary'
 import path from 'path'
+import fs from 'fs'
 import dotenv from 'dotenv'
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
+import esMain from 'es-main'
+
 import { generateThumbnail } from '../lib/image.mjs'
 
-// load .env file
-dotenv.config()
+function getPublicId(imagePath) {
+  const cloudPath = path.join(process.env.NEXT_PUBLIC_CLOUDINARY_ROOT_FOLDER, imagePath)
+  // public_id: remove file extension
+  return cloudPath.replace(/\.[^/.]+$/, '')
+}
 
-cloudinary.v2.config({
-  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-  secure: true,
-})
+// NOTE: cloudinary will create subfolders automatically if necessary
+async function upload(imagePath, invalidateCache = true) {
+  // check if file exists
+  const filePath = path.join(process.cwd(), 'public', imagePath)
+  if (!fs.existsSync(filePath)) {
+    console.error('image not found:', filePath)
+    return false
+  }
 
-async function uploadToCloudinary(imagePath) {
-  // support uploading image to subfolders
-  // cloudinary will create subfolders automatically if necessary
-  const folder = path.join(process.env.NEXT_PUBLIC_CLOUDINARY_ROOT_FOLDER, path.dirname(imagePath))
-  // public_id: ignore file extension
-  const filename = path.parse(imagePath).name
+  const publicId = getPublicId(imagePath)
 
-  // delete and invalidate cache
-  // cloudinary.v2.uploader.destroy(path.join(folder, filename), {
-  //   invalidate: 'true',
-  // })
+  if (invalidateCache) {
+    await deleteFromCloud(publicId)
+  }
 
   // upload
-  const filePath = path.join(process.cwd(), 'public', imagePath)
-  console.log(`uploading image to cloudinary: ${filePath}...`)
+  console.log(`uploading image: ${filePath}...`)
   try {
     const resp = await cloudinary.v2.uploader.upload(filePath, {
-      folder,
-      public_id: filename,
+      public_id: publicId,
       resource_type: 'image',
     })
     console.log('image uploaded:', resp.public_id)
+    return true
   } catch (error) {
     console.log('image upload failed:', error.message)
+    return false
   }
 }
 
-;(async () => {
-  if (process.argv.length < 3) {
-    console.log('Usage: yarn image <imagePath> [slug]')
-    return
+async function deleteImage(imagePath) {
+  // delete local file
+  const filePath = path.join(process.cwd(), 'public', imagePath)
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath)
+    console.log('deleted local file:', filePath)
   }
 
-  const imagePath = `/static/images/${process.argv[2]}` // 2023/image.jpg
-  await uploadToCloudinary(imagePath)
+  // delete from cloud
+  const publicId = getPublicId(imagePath)
+  await deleteFromCloud(publicId)
+}
 
-  const slug = process.argv[3] // 2023/hello-world
-  if (slug) {
-    await generateThumbnail(slug, imagePath)
-  }
-})()
+async function deleteFromCloud(publicId) {
+  // delete from cloudinary and invalidate CDN cache
+  const resp = await cloudinary.v2.uploader.destroy(publicId, {
+    invalidate: 'true',
+  })
+  console.log('deleting from cloud:', resp)
+}
+
+function main() {
+  yargs(hideBin(process.argv))
+    .version(false)
+    .strict()
+    .command(
+      'upload <path> [slug]',
+      'upload image to cloudinary and optionally generate thumbnail',
+      (yargs) => {
+        return yargs
+          .option('slug', {
+            alias: 's',
+            type: 'string',
+            desc: 'the related doc slug',
+          })
+          .option('delete', {
+            alias: 'd',
+            type: 'boolean',
+            default: true,
+            desc: 'delete old image and invalidate CDN cache',
+          })
+      },
+      async (argv) => {
+        // 2023/image.jpg
+        const imagePath = `/static/images/${argv.path}`
+        const uploaded = await upload(imagePath, argv.delete)
+
+        if (uploaded && argv.slug) {
+          // 2023/hello-world
+          await generateThumbnail(argv.slug, imagePath)
+        }
+      }
+    )
+    .command(
+      'delete <path>',
+      'delete image from cloudinary and invalidate CDN cache',
+      () => {},
+      (argv) => {
+        const imagePath = `/static/images/${argv.path}`
+        deleteImage(imagePath)
+      }
+    )
+    .positional('path', {
+      type: 'string',
+      desc: 'image path relative to `/public/static/images/` folder',
+    })
+    .alias('h', 'help')
+    .parse()
+}
+
+// check if this ES module is run directly with Node.js
+if (esMain(import.meta)) {
+  // load .env file
+  dotenv.config()
+
+  cloudinary.v2.config({
+    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    secure: true,
+  })
+
+  main()
+}

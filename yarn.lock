@@ -3789,6 +3789,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/yargs-parser@npm:*":
+  version: 21.0.0
+  resolution: "@types/yargs-parser@npm:21.0.0"
+  checksum: b2f4c8d12ac18a567440379909127cf2cec393daffb73f246d0a25df36ea983b93b7e9e824251f959e9f928cbc7c1aab6728d0a0ff15d6145f66cec2be67d9a2
+  languageName: node
+  linkType: hard
+
+"@types/yargs@npm:^17.0.24":
+  version: 17.0.24
+  resolution: "@types/yargs@npm:17.0.24"
+  dependencies:
+    "@types/yargs-parser": "*"
+  checksum: 5f3ac4dc4f6e211c1627340160fbe2fd247ceba002190da6cf9155af1798450501d628c9165a183f30a224fc68fa5e700490d740ff4c73e2cdef95bc4e8ba7bf
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/eslint-plugin@npm:^6.4.0":
   version: 6.4.0
   resolution: "@typescript-eslint/eslint-plugin@npm:6.4.0"
@@ -5630,6 +5646,13 @@ __metadata:
     unbox-primitive: ^1.0.2
     which-typed-array: ^1.1.9
   checksum: 037f55ee5e1cdf2e5edbab5524095a4f97144d95b94ea29e3611b77d852fd8c8a40e7ae7101fa6a759a9b9b1405f188c3c70928f2d3cd88d543a07fc0d5ad41a
+  languageName: node
+  linkType: hard
+
+"es-main@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "es-main@npm:1.2.0"
+  checksum: b1feaaa71c0c5b0c494cd7d4f1fdb32fcdc9835b824ca2f61a7fbb899627305d88efef584490c24ebacde79289ac14908823c066176e15a784c49fa924db9b0b
   languageName: node
   linkType: hard
 
@@ -9611,6 +9634,7 @@ __metadata:
     "@tailwindcss/typography": ^0.5.9
     "@types/mdx": ^2.0.6
     "@types/react": ^18.2.20
+    "@types/yargs": ^17.0.24
     "@typescript-eslint/eslint-plugin": ^6.4.0
     "@typescript-eslint/parser": ^6.4.0
     algoliasearch: ^4.19.1
@@ -9621,6 +9645,7 @@ __metadata:
     contentlayer: 0.3.4
     cross-env: ^7.0.3
     dotenv: ^16.3.1
+    es-main: ^1.2.0
     esbuild: ^0.19.2
     eslint: ^8.47.0
     eslint-config-next: ^13.4.16
@@ -9656,6 +9681,7 @@ __metadata:
     typed.js: ^2.0.16
     typescript: ^5.1.6
     unist-util-visit: ^4.1.2
+    yargs: ^17.7.2
   languageName: unknown
   linkType: soft
 
