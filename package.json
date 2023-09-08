@@ -12,7 +12,7 @@
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts",
     "image": "node ./scripts/cloudinary.mjs",
     "content": "contentlayer build",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -t v -s"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^13.4.16",
