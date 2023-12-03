@@ -69,9 +69,6 @@ module.exports = () => {
       loader: 'custom',
       loaderFile: './image-loader.ts',
     },
-    experimental: {
-      appDir: true,
-    },
     // output: 'export',
     async headers() {
       return [
