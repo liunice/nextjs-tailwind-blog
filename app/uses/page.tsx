@@ -1,4 +1,4 @@
-import { Page, allPages } from 'contentlayer/generated'
+import { type Page, allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import UsesPageLayout from '@/layouts/UsesPageLayout'
 import { components } from '@/components/MDXComponents'
