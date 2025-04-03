@@ -1,5 +1,3 @@
-import { Twemoji } from '@/components/Twemoji'
-
 export function Heading() {
   return (
     <h1 className="text-neutral-900 dark:text-neutral-200">

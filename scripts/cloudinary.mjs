@@ -70,7 +70,7 @@ function main() {
     .version(false)
     .strict()
     .command(
-      'upload <path> [slug]',
+      'upload <path> [-s <slug>]',
       'upload image to cloudinary and optionally generate thumbnail',
       (yargs) => {
         return yargs

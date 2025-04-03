@@ -1,0 +1,72 @@
+---
+title: I Spent 5 Days Building My First SaaS — Here's What I Learned
+date: '2025-04-03'
+tags:
+  [
+    'Startup',
+    'SaaS',
+    'Ghibli',
+    'Next.js',
+    'Supabase',
+    'Stripe',
+    'AI Tools',
+    'ChatGPT',
+    'SEO',
+    'Cloudflare',
+    'Vercel',
+    'Replicate',
+  ]
+draft: false
+summary: 'Built a Ghibli-style AI SaaS in 5 days with Next.js/Supabase. Mastered Stripe integration & SEO. No free tier due to API costs.'
+images: ['/static/images/2025/GhibStyle-screenshot-light.jpeg']
+---
+
+You might not believe this, but I haven't had a "real job" in 5 years — and I've been low-income the entire time. During this time, I've tried many projects — mobile apps, freelancing gigs, remote work — but none of them worked out well.
+
+Recently, AI technology has advanced rapidly, with impressive new AI products emerging every day. This has created many opportunities for entrepreneurs like me. At the same time, AI-powered coding tools have become so powerful that they've given me the confidence to tackle more complex projects.
+
+A few days ago, GPT-4o's image-generation capabilities took another leap forward, and the keyword "Ghibli" suddenly went viral. Many people were using ChatGPT to transform their photos into Studio Ghibli-style artwork, with amazing results!
+
+As a freelancer, I immediately wondered if I could build a website to replicate this feature — specifically, a Ghibli-style filter tool that could convert user-uploaded images into Ghibli-style art.
+
+Unfortunately, GPT-4o hasn't released its image-to-image API publicly, so I had to look for alternatives. I checked Hugging Face and OpenRouter, but neither offered a Ghibli-style image-to-image model.
+
+My last hope was Replicate — and to my surprise, they had not just one but multiple models available. After testing several, I chose one with good results and a reasonable price. The model runs on Replicate's H100 hardware, costing about $0.013 per generated image.
+
+Originally, I wanted to offer a free trial feature, allowing new users to generate 1-3 images for free. But I couldn't find a suitable model (forget about those extremely low-quality, cheap ones), so I had to scrap the trial idea. I know this might deter some curious users, but from a business perspective, I didn't want to start off losing money. Instead, I designed three credit-based pricing plans — users can buy credits and use 1 credit per generated image.
+
+## The Tech Stack I Used:
+
+- Frontend + Backend: Next.js v15
+- Database: Supabase
+- Image Storage: Cloudflare R2
+
+I purchased a Next.js SaaS template, which took me a few days to get familiar with. But considering the time it'll save me in future projects, I think it was worth it. By the way, I bought my domain from Spaceship.
+
+At first, I tried deploying the site on Cloudflare Pages but failed — Pages only runs on Edge Runtime, which imposes some limitations and prevents certain npm libraries from working. Eventually, I deployed it on Vercel, a platform I'm more familiar with. By connecting my GitHub repo and tweaking a few settings, the site went live smoothly. Vercel has a free tier, but if traffic grows, upgrading to a paid plan might be necessary.
+
+## What I Learned:
+
+1. How to use a Next.js SaaS template to quickly build a full-stack website
+2. How to manage a database with Supabase (they have a free tier!)
+3. How to handle image storage with Cloudflare R2 (also has a free tier)
+4. How to implement Google OAuth for user logins
+5. How to track website analytics with Google Analytics
+6. How to add internationalization (multi-language support)
+7. How to handle basic SEO
+8. How to integrate Stripe SDK for payment processing
+9. How to use Cursor IDE's AI-assisted coding (including Project Rules for better AI context)
+
+## Regrets:
+
+1. Couldn't find an affordable image-to-image API, so no free trial feature
+2. The site has too few pages and relatively simple functionality
+3. Failed to deploy on Cloudflare Pages
+
+## Next Steps:
+
+1. Add more pages (e.g., a text-to-image tool, blog posts)
+2. Optimize SEO content, build backlinks, and monitor Google Search Console for organic traffic growth
+3. Keep searching for better (and reasonably priced) image-to-image models to make the core feature more competitive
+
+Thanks for reading! If you're curious, check out my site: [GhibStyle](https://ghibli-style.cc). Feel free to ask any questions in the comments — I'll do my best to answer them. Cheers!
